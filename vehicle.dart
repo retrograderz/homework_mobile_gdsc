@@ -1,4 +1,4 @@
-enum VehicleCategory { Public, Private }
+enum VehicleCategory { Public("Công cộng"), Private("Cá nhân"); final String detail; const VehicleCategory(this.detail); }
 
 abstract class Vehicle {
   String _name;  
@@ -17,7 +17,6 @@ abstract class Vehicle {
   }
 
   VehicleCategory get category => _category;
-
   String getDetails();
 }
 
@@ -25,9 +24,19 @@ class Car extends Vehicle {
   int numberOfSeats;
 
   /**TODO: Implement constructor of car**/
+  Car(String name, double speed, VehicleCategory category, this.numberOfSeats) : super(name, speed, category);
+
+  // Triển khai hàm getDetail() sẽ trả về loại xe (VehicleCategory), tốc độ (speed), tên(name)
+  // và thuộc tính có thêm của từng loại xe : Car và Bus
   @override
   String getDetails() {
     /**TODO: Implement this function**/
+    String res = "";
+    res += "Loại phương tiện: ${category.detail}";
+    res += "\nTốc độ: " + speed.toString() + " km/h";
+    res += "\nTên: " + name;
+    res += "\nSố lượng ghế: " + numberOfSeats.toString() + " ghế";
+    return res; 
   }
 }
 
@@ -35,10 +44,17 @@ class Bus extends Vehicle {
   int capacity;
 
   /**TODO: Implement constructor of bus**/
+  Bus(String name, double speed, VehicleCategory category, this.capacity) : super(name, speed, category);
 
   @override
   String getDetails() {
     /**TODO: Implement this function**/
+    String res = "";
+    res += "Loại phương tiện: ${category.detail}";
+    res += "\nTốc độ: " + speed.toString() + " km/h";
+    res += "\nTên: " + name;
+    res += "\nSức chứa: " + capacity.toString() + " người";
+    return res;
   }
 }
 
